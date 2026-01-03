@@ -3,7 +3,6 @@ import db from "../db.js";
 
 const router = Router();
 
-// Get all todos
 router.get("/all", async (req, res) => {
   try {
     const todos = await db.query("SELECT * FROM todo ORDER BY todo_id ASC");
@@ -21,6 +20,9 @@ router.get("/all", async (req, res) => {
 router.post("/add", async (req, res) => {
   try {
     const { description, completed } = req.body;
+    if (!description) {
+      return res.status(400).json({ message: "Description is required" });
+    }
     const newTodo = await db.query(
       "INSERT INTO todo (description, completed) VALUES ($1, $2) RETURNING *",
       [description, completed || false]
@@ -35,7 +37,6 @@ router.post("/add", async (req, res) => {
 router.delete("/delete/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    // check if todo exists
     const todo = await db.query("SELECT * FROM todo WHERE todo_id = $1", [id]);
     if (todo.rows.length === 0) {
       return res.status(404).json({ message: `Todo with id ${id} not found` });
@@ -57,6 +58,9 @@ router.put("/update/:id", async (req, res) => {
       return res.status(404).json({ message: `Todo with id ${id} not found` });
     }
     const { description, completed } = req.body;
+    if (!description) {
+      return res.status(400).json({ message: "Description is required" });
+    }
     const updatedTodo = await db.query(
       "UPDATE todo SET description = $1, completed = $2 WHERE todo_id = $3 RETURNING *",
       [description, completed, id]
