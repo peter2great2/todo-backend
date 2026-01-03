@@ -20,10 +20,10 @@ router.get("/all", async (req, res) => {
 // Add a new todo
 router.post("/add", async (req, res) => {
   try {
-    const { description } = req.body;
+    const { description, completed } = req.body;
     const newTodo = await db.query(
-      "INSERT INTO todo (description) VALUES ($1) RETURNING *",
-      [description]
+      "INSERT INTO todo (description, completed) VALUES ($1, $2) RETURNING *",
+      [description, completed || false]
     );
     res.json(newTodo.rows[0]);
   } catch (err) {
