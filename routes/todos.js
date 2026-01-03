@@ -7,7 +7,7 @@ router.get("/all", async (req, res) => {
   try {
     const todos = await db.query("SELECT * FROM todo ORDER BY todo_id ASC");
     if (!todos.rows.length) {
-      return res.status(404).json({ message: "Todo list is empty" });
+      return res.status(404).json({ message: "Your todo list is empty" });
     }
     res.json(todos.rows);
   } catch (err) {
@@ -52,7 +52,6 @@ router.delete("/delete/:id", async (req, res) => {
 router.put("/update/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    // check if todo exists
     const todo = await db.query("SELECT * FROM todo WHERE todo_id = $1", [id]);
     if (todo.rows.length === 0) {
       return res.status(404).json({ message: `Todo with id ${id} not found` });
