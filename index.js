@@ -6,7 +6,16 @@ import cors from "cors";
 import todoRoutes from "./api/todos.js";
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://todo-frontend-steel-ten.vercel.app",
+    ],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 app.use(express.json());
 app.use("/todos", todoRoutes);
 
