@@ -9,11 +9,11 @@ import todoRoutes from "./api/todos.js";
 app.use(
   cors({
     origin: [
-      "http://localhost:3000",
-      "https://todo-frontend-steel-ten.vercel.app",
+      "http://localhost:5173",
+      "https://todo-frontend-lkm4hgbwb-peter2great2s-projects.vercel.app",
     ],
-    credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
   })
 );
 app.use(express.json());
