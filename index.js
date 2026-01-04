@@ -12,6 +12,7 @@ app.use(
       "http://localhost:5173",
       "https://todo-frontend-git-main-peter2great2s-projects.vercel.app",
       "https://todo-frontend-lkm4hgbwb-peter2great2s-projects.vercel.app",
+      "https://todo-frontend-steel-ten.vercel.app",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
