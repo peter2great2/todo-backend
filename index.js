@@ -3,7 +3,7 @@ import express from "express";
 const app = express();
 const PORT = process.env.PORT || 3000;
 import cors from "cors";
-import todoRoutes from "./routes/todos.js";
+import todoRoutes from "./api/todos.js";
 
 // Middleware
 app.use(cors());
