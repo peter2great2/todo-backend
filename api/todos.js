@@ -19,7 +19,7 @@ router.get("/all", async (req, res) => {
 // Add a new todo
 router.post("/add", async (req, res) => {
   try {
-    const { description, completed } = req.body;
+    const { description, completed = false } = req.body;
     if (!description) {
       return res.status(400).json({ message: "Description is required" });
     }
