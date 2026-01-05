@@ -24,8 +24,8 @@ router.post("/add", async (req, res) => {
       return res.status(400).json({ message: "Description is required" });
     }
     const newTodo = await db.query(
-      "INSERT INTO todo (description, completed) VALUES ($1, $2) RETURNING *",
-      [description, completed || false]
+      "INSERT INTO todo (description, completed, created_at) VALUES ($1, $2, $3) RETURNING *",
+      [description, completed, created_at || false]
     );
     res.json(newTodo.rows[0]);
   } catch (err) {
